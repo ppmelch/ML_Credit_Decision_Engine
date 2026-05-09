@@ -1,0 +1,19 @@
+{
+  "descripcion": "Tabla cross-section unificada de features municipales para el cálculo del score regional municipal del Componente 1 del modelo de crédito remesa.",
+  "n_municipios": 124,
+  "n_features": 32,
+  "periodo_temporal_features_remesas": "2020-01-01 a 2024-12-31",
+  "fuentes": {
+    "catalogo": "municipios_jalisco_catalogo.csv",
+    "remesas_trimestrales": "banxico_ce166_jalisco_trimestral.csv",
+    "intensidad_migratoria": "conapo_iim_jalisco_2020.csv",
+    "marginacion": "conapo_marginacion_jalisco_2020.csv",
+    "indicadores_iter": "inegi_iter_jalisco_2020.csv"
+  },
+  "consultation_timestamp": "2026-05-06T07:12:53",
+  "notas": [
+    "Las features temporales del CE166 (mediana, CV, pendiente) se computan sobre 20 trimestres del periodo 2020-2024 por estabilidad post-pandemia y alineación con el Censo 2020.",
+    "remesas_per_capita_2024 está en USD per cápita (= remesas_2024_total × 1e6 / pob_total).",
+    "Si un municipio tiene menos de 12 observaciones trimestrales en el periodo, las features temporales son NaN."
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "dataset": "Iter 2020 — Censo de Población y Vivienda 2020",
+  "institucion": "Instituto Nacional de Estadística y Geografía (INEGI)",
+  "n_municipios_publicados_jalisco": 125,
+  "n_municipios_incluidos_en_dataset": 124,
+  "n_municipios_excluidos": 1,
+  "municipios_excluidos": [
+    "cve 14125 (San Ignacio Cerro Gordo)"
+  ],
+  "indicadores_extraidos": {
+    "absolutos": {
+      "POBTOT": "pob_total",
+      "TVIVPARHAB": "viv_part_hab",
+      "PEA": "pea",
+      "POCUPADA": "pob_ocupada"
+    },
+    "escalares": {
+      "GRAPROES": "escolaridad_promedio"
+    },
+    "porcentajes_sobre_TVIVPARHAB": {
+      "VPH_INTER": "pct_viv_internet",
+      "VPH_CEL": "pct_viv_celular",
+      "VPH_PC": "pct_viv_pc",
+      "VPH_AUTOM": "pct_viv_auto"
+    },
+    "derivados": {
+      "tasa_ocupacion": "POCUPADA / PEA × 100"
+    }
+  },
+  "tratamiento_missing": "Los valores '*' del Iter representan dato confidencial por privacidad estadística y se tratan como missing.",
+  "source_url": "https://www.inegi.org.mx/programas/ccpv/2020/#descargas",
+  "raw_file": "inegi_iter_jalisco_2020_raw.csv",
+  "raw_file_origen": "ITER_14CSV20.csv",
+  "raw_file_encoding": "utf-8 con BOM (utf-8-sig)",
+  "consultation_timestamp": "2026-05-06T01:23:11",
+  "apa7_reference": "Instituto Nacional de Estadística y Geografía. (2021). Censo de Población y Vivienda 2020: Indicadores por entidad y municipio (Iter), Jalisco. INEGI. https://www.inegi.org.mx/programas/ccpv/2020/"
+}

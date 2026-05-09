@@ -1,0 +1,14 @@
+{
+  "series_id": "SE27803",
+  "series_name": "Ingresos por remesas familiares, total nacional, frecuencia mensual",
+  "unit": "Millones de dólares estadounidenses",
+  "frequency": "Mensual",
+  "start_date": "2013-01-01",
+  "end_date": "2024-12-31",
+  "n_observations": 144,
+  "n_missing": 0,
+  "source_url": "https://www.banxico.org.mx/SieAPIRest/service/v1/series/SE27803/datos/2013-01-01/2024-12-31",
+  "portal_url": "https://www.banxico.org.mx/SieAPIRest/service/v1/doc/consultaSeriesDeTiempo",
+  "consultation_timestamp": "2026-05-05T20:25:55",
+  "apa7_reference": "Banco de México. (2025). Ingresos por remesas familiares, total nacional [Serie SE27803]. Sistema de Información Económica. https://www.banxico.org.mx/SieAPIRest/service/v1/series/SE27803"
+}

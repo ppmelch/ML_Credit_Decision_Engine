@@ -1,0 +1,315 @@
+{
+  "descripcion": "Padrón sintético de 10,000 hogares receptores de remesas en Jalisco. Asignación municipal proporcional al volumen real de remesas 2024 (Banxico CE166 desagregado vía Chow-Lin, Fase 3). Atributos demográficos calibrados con distribuciones agregadas de CEMLA, BBVA Research e INEGI Censo 2020.",
+  "n_hogares": 10000,
+  "seed": 42,
+  "anio_pesos_municipales": 2024,
+  "fuentes_calibracion": {
+    "edad_receptor": "CEMLA (2024) — edad media receptor 43-47.",
+    "genero_receptor": "BBVA Research, Anuario de Migración y Remesas México 2024 — 60-70% receptores son mujeres.",
+    "escolaridad": "INEGI Censo 2020, hogares receptores en entidades de alta migración del centro-occidente.",
+    "n_dependientes": "CEMLA — tamaño promedio del hogar receptor ≈ 3.3 personas.",
+    "tipo_vivienda_actual": "INEGI Censo 2020 — tenencia de vivienda en hogares receptores de remesas en Jalisco.",
+    "antiguedad_recepcion_meses": "BBVA Research — duración media del flujo ~5 años.",
+    "remesa_mediana_esperada_usd": "Banxico (2024) — monto promedio por envío ≈ 380 USD."
+  },
+  "parametros_distribuciones": {
+    "edad_normal_truncada": {
+      "mu": 45.0,
+      "sigma": 12.0,
+      "lo": 18,
+      "hi": 80
+    },
+    "genero_bernoulli_p_F": 0.65,
+    "escolaridad_categorica": {
+      "sin_estudios": 0.08,
+      "primaria": 0.32,
+      "secundaria": 0.28,
+      "media_superior": 0.2,
+      "superior": 0.12
+    },
+    "dependientes_poisson_truncada": {
+      "lambda": 2.3,
+      "max": 8
+    },
+    "vivienda_categorica": {
+      "propia": 0.62,
+      "rentada": 0.22,
+      "prestada": 0.16
+    },
+    "antiguedad_lognormal_truncada": {
+      "mu_ln": 4.0943445622221,
+      "sigma_ln": 0.7,
+      "lo": 24,
+      "hi": 240
+    },
+    "remesa_mediana_lognormal": {
+      "mu_ln": 5.940171252720432,
+      "sigma_ln": 0.45
+    }
+  },
+  "diagnostico": {
+    "n_hogares": 10000,
+    "n_municipios_con_hogares": 124,
+    "asignacion_municipio_correlacion_remesas": 0.999998,
+    "edad_receptor": {
+      "media": 45.2009,
+      "mediana": 45.0,
+      "p25": 37.0,
+      "p75": 53.0,
+      "min": 18,
+      "max": 80,
+      "target_media": 45.0
+    },
+    "genero_receptor": {
+      "F": 6436,
+      "M": 3564,
+      "pct_F_realizado": 0.6436,
+      "pct_F_target": 0.65
+    },
+    "escolaridad": {
+      "sin_estudios": {
+        "n": 794,
+        "pct_realizado": 0.0794,
+        "pct_target": 0.08
+      },
+      "primaria": {
+        "n": 3134,
+        "pct_realizado": 0.3134,
+        "pct_target": 0.32
+      },
+      "secundaria": {
+        "n": 2815,
+        "pct_realizado": 0.2815,
+        "pct_target": 0.28
+      },
+      "media_superior": {
+        "n": 2089,
+        "pct_realizado": 0.2089,
+        "pct_target": 0.2
+      },
+      "superior": {
+        "n": 1168,
+        "pct_realizado": 0.1168,
+        "pct_target": 0.12
+      }
+    },
+    "n_dependientes": {
+      "media": 2.3022,
+      "target_media": 2.3,
+      "min": 0,
+      "max": 8
+    },
+    "tipo_vivienda_actual": {
+      "propia": {
+        "n": 6200,
+        "pct_realizado": 0.62,
+        "pct_target": 0.62
+      },
+      "rentada": {
+        "n": 2231,
+        "pct_realizado": 0.2231,
+        "pct_target": 0.22
+      },
+      "prestada": {
+        "n": 1569,
+        "pct_realizado": 0.1569,
+        "pct_target": 0.16
+      }
+    },
+    "antiguedad_recepcion_meses": {
+      "mediana": 63.0,
+      "p25": 43.0,
+      "p75": 98.0,
+      "min": 24,
+      "max": 240,
+      "target_mediana": 60
+    },
+    "remesa_mediana_esperada_usd": {
+      "mediana": 376.3,
+      "media": 417.853722,
+      "p25": 278.6225,
+      "p75": 511.6725,
+      "target_mediana": 380.0
+    },
+    "top_10_municipios": [
+      {
+        "cve_municipio": "14039",
+        "n_hogares": 1203,
+        "pct_padron": 0.1203
+      },
+      {
+        "cve_municipio": "14120",
+        "n_hogares": 712,
+        "pct_padron": 0.0712
+      },
+      {
+        "cve_municipio": "14093",
+        "n_hogares": 343,
+        "pct_padron": 0.0343
+      },
+      {
+        "cve_municipio": "14064",
+        "n_hogares": 304,
+        "pct_padron": 0.0304
+      },
+      {
+        "cve_municipio": "14098",
+        "n_hogares": 278,
+        "pct_padron": 0.0278
+      },
+      {
+        "cve_municipio": "14053",
+        "n_hogares": 264,
+        "pct_padron": 0.0264
+      },
+      {
+        "cve_municipio": "14101",
+        "n_hogares": 264,
+        "pct_padron": 0.0264
+      },
+      {
+        "cve_municipio": "14067",
+        "n_hogares": 263,
+        "pct_padron": 0.0263
+      },
+      {
+        "cve_municipio": "14006",
+        "n_hogares": 256,
+        "pct_padron": 0.0256
+      },
+      {
+        "cve_municipio": "14124",
+        "n_hogares": 241,
+        "pct_padron": 0.0241
+      }
+    ],
+    "pct_hogares_gdl_zapopan": 0.1915
+  },
+  "asignacion_por_municipio": {
+    "14001": 56,
+    "14002": 53,
+    "14003": 78,
+    "14004": 1,
+    "14005": 33,
+    "14006": 256,
+    "14007": 2,
+    "14008": 206,
+    "14009": 22,
+    "14010": 5,
+    "14011": 2,
+    "14012": 19,
+    "14013": 146,
+    "14014": 4,
+    "14015": 142,
+    "14016": 89,
+    "14017": 20,
+    "14018": 194,
+    "14019": 4,
+    "14020": 12,
+    "14021": 97,
+    "14022": 81,
+    "14023": 145,
+    "14024": 131,
+    "14025": 85,
+    "14026": 11,
+    "14027": 3,
+    "14028": 13,
+    "14029": 67,
+    "14030": 93,
+    "14031": 1,
+    "14032": 3,
+    "14033": 177,
+    "14034": 7,
+    "14035": 145,
+    "14036": 35,
+    "14037": 157,
+    "14038": 16,
+    "14039": 1203,
+    "14040": 1,
+    "14041": 31,
+    "14042": 34,
+    "14043": 68,
+    "14044": 24,
+    "14045": 43,
+    "14046": 122,
+    "14047": 44,
+    "14048": 56,
+    "14049": 7,
+    "14050": 110,
+    "14051": 8,
+    "14052": 18,
+    "14053": 264,
+    "14054": 3,
+    "14055": 78,
+    "14056": 1,
+    "14057": 11,
+    "14058": 61,
+    "14059": 41,
+    "14060": 12,
+    "14061": 13,
+    "14062": 18,
+    "14063": 146,
+    "14064": 304,
+    "14065": 23,
+    "14066": 96,
+    "14067": 263,
+    "14068": 31,
+    "14069": 15,
+    "14070": 106,
+    "14071": 1,
+    "14072": 9,
+    "14073": 107,
+    "14074": 112,
+    "14075": 1,
+    "14076": 4,
+    "14077": 55,
+    "14078": 125,
+    "14079": 31,
+    "14080": 5,
+    "14081": 1,
+    "14082": 61,
+    "14083": 111,
+    "14084": 39,
+    "14085": 119,
+    "14086": 42,
+    "14087": 8,
+    "14088": 76,
+    "14089": 1,
+    "14090": 43,
+    "14091": 132,
+    "14092": 15,
+    "14093": 343,
+    "14094": 61,
+    "14095": 3,
+    "14096": 153,
+    "14097": 181,
+    "14098": 278,
+    "14099": 18,
+    "14100": 29,
+    "14101": 264,
+    "14102": 13,
+    "14103": 1,
+    "14104": 2,
+    "14105": 83,
+    "14106": 4,
+    "14107": 2,
+    "14108": 36,
+    "14109": 17,
+    "14110": 131,
+    "14111": 22,
+    "14112": 2,
+    "14113": 23,
+    "14114": 13,
+    "14115": 5,
+    "14116": 135,
+    "14117": 3,
+    "14118": 45,
+    "14119": 146,
+    "14120": 712,
+    "14121": 61,
+    "14122": 7,
+    "14123": 2,
+    "14124": 241
+  },
+  "consultation_timestamp": "2026-05-06T15:50:29"
+}

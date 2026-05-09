@@ -1,0 +1,25 @@
+{
+  "cuadro_id": "CE166",
+  "cuadro_nombre": "Ingresos por remesas, distribución por municipio",
+  "unit": "Millones de dólares estadounidenses",
+  "frequency": "Trimestral",
+  "tipo_informacion": "Niveles",
+  "n_municipios_jalisco_publicados_banxico": 125,
+  "n_municipios_incluidos_en_dataset": 124,
+  "n_observaciones_trimestrales": 53,
+  "n_registros_largos": 6572,
+  "n_valores_faltantes": 0,
+  "municipios_excluidos": [
+    "San Ignacio Cerro Gordo",
+    "No identificado"
+  ],
+  "equivalencias_nombre_banxico": {
+    "Tlaquepaque": "San Pedro Tlaquepaque"
+  },
+  "metodo_cruce": "Cruce por nombre oficial normalizado (sin tildes, minúsculas) contra el catálogo unificado del proyecto. La clave INEGI se hereda del catálogo, que a su vez la deriva del archivo CONAPO IIM 2020.",
+  "source_url": "https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?accion=consultarCuadro&idCuadro=CE166&locale=es",
+  "consultation_timestamp": "2026-05-06T00:50:54",
+  "raw_file": "banxico_ce166_remesas_municipales_raw.csv",
+  "raw_file_encoding": "cp1252 (Windows-1252)",
+  "apa7_reference": "Banco de México. (2025). Ingresos por remesas, distribución por municipio [Cuadro CE166]. Sistema de Información Económica. https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?accion=consultarCuadro&idCuadro=CE166"
+}

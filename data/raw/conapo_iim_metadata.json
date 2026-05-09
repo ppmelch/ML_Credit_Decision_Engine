@@ -1,0 +1,27 @@
+{
+  "dataset": "Índice de Intensidad Migratoria México-Estados Unidos 2020 — Municipal",
+  "institucion": "Secretaría General del Consejo Nacional de Población (SG-CONAPO)",
+  "n_municipios_jalisco_publicados_conapo": 125,
+  "n_municipios_incluidos_en_dataset": 124,
+  "n_municipios_excluidos": 1,
+  "municipios_excluidos": [
+    "cve 14125 (San Ignacio Cerro Gordo)"
+  ],
+  "metodologia": "Índice DP2 (distancia multivariante de Pena-Trapero). Sintetiza cuatro indicadores: % viviendas receptoras de remesas, % viviendas con emigrantes a EE.UU., % viviendas con migrantes circulares y % viviendas con migrantes de retorno. El índice continuo (iim_dp2) se estratifica en cinco grados (gim_dp2): Muy bajo, Bajo, Medio, Alto, Muy alto.",
+  "unidades": {
+    "viv_tot": "Viviendas (conteo absoluto)",
+    "pct_viv_remesas": "Porcentaje (0-100)",
+    "pct_viv_emigrantes": "Porcentaje (0-100)",
+    "pct_viv_circular": "Porcentaje (0-100)",
+    "pct_viv_retorno": "Porcentaje (0-100)",
+    "iim_dp2": "Índice continuo (mayor = más intensidad migratoria)",
+    "gim_dp2": "Categoría ordinal",
+    "pos_nacional": "Posición en el ranking nacional (1 = mayor intensidad)"
+  },
+  "source_url": "https://www.datos.gob.mx/dataset/indice_intensidad_migratoria",
+  "raw_file": "conapo_iim_municipal_2020_raw.csv",
+  "raw_file_origen": "06_iim_mex_eeuu_2020_municipio.csv",
+  "encoding_origen": "latin-1",
+  "consultation_timestamp": "2026-05-06T00:48:48",
+  "apa7_reference": "Consejo Nacional de Población. (2021). Índices de intensidad migratoria México-Estados Unidos 2020 [Base de datos a nivel municipal]. Secretaría General del Consejo Nacional de Población. https://www.gob.mx/conapo/documentos/indice-de-intensidad-migratoria-mexico-estados-unidos-2020"
+}

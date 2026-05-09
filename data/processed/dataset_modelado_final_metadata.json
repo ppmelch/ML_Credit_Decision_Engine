@@ -1,0 +1,243 @@
+{
+  "descripcion": "Dataset final de modelado individual con target binario default_12m generado por modelo de propensión latente calibrado con tasa de mora hipotecaria del segmento vivienda popular (CNBV, 2024).",
+  "n_hogares": 10000,
+  "n_columnas_total": 31,
+  "seed": 42,
+  "tasa_default_target": 0.055,
+  "tasa_default_realizada": 0.0554,
+  "fuente_tasa_default": "CNBV — Boletín Estadístico de Banca Múltiple, 2024. Tasa de morosidad del segmento de vivienda popular y crédito de mejoramiento, segmento congruente con el producto financiero modelado en este proyecto.",
+  "modelo_generacion": "z_i = β_0 + β_PA·s_PA(i) + β_PB·s_PB(i) + β_PC·s_PC(i) + ε_i; p_default_i = sigmoid(z_i); default_12m_i ~ Bernoulli(p_default_i)",
+  "pesos_pilares": {
+    "pilar_A": 0.5,
+    "pilar_B": 0.25,
+    "pilar_C": 0.25
+  },
+  "factor_amplitud_senal": {
+    "valor": 4.0,
+    "justificacion": "La normalización de coeficientes intra-pilar comprime la magnitud del score estructural; este factor restaura la amplitud de los efectos a un nivel consistente con la separabilidad reportada en la literatura de credit scoring hipotecario sin buró (AUC 0.75-0.80, Lessmann et al., 2015). El valor k=4.0 se calibró numéricamente para que la regresión logística sobre el target sintético alcance AUC ≈ 0.78 en validación cruzada de 5 pliegues."
+  },
+  "ruido_logit": {
+    "distribucion": "Normal(0, sigma)",
+    "sigma": 1.0,
+    "justificacion": "σ=0.5 produce AUC esperado en el rango 0.65-0.75 para los modelos posteriores, consistente con la literatura empírica de credit scoring hipotecario (Lessmann et al., 2015 reportan AUC 0.65-0.78 sobre 8 datasets reales; modelos de mora hipotecaria de CNBV y Bank of Spain reportan típicamente 0.68-0.75). Un AUC superior a 0.80 sería excepcional en este dominio y poco realista para un dataset sintético. Sin ruido el target sería perfectamente predecible y los modelos darían AUC ≈ 1.0, lo cual no es realista ni informativo para comparar arquitecturas."
+  },
+  "intercepto_calibrado_b0": -3.8364791870117188,
+  "coeficientes_pilar_a_normalizados": {
+    "pa_ratio_remesa_cuota": -0.3488372093023256,
+    "pa_n_meses_sin_envio": 0.18604651162790697,
+    "pa_max_racha_sin_envio": 0.13953488372093023,
+    "pa_cv_remesa": 0.11627906976744186,
+    "pa_pendiente_norm": -0.09302325581395349,
+    "pa_antiguedad_meses": -0.11627906976744186
+  },
+  "coeficientes_pilar_a_raw": {
+    "pa_ratio_remesa_cuota": -4.5,
+    "pa_n_meses_sin_envio": 2.4,
+    "pa_max_racha_sin_envio": 1.8,
+    "pa_cv_remesa": 1.5,
+    "pa_pendiente_norm": -1.2,
+    "pa_antiguedad_meses": -1.5
+  },
+  "coeficientes_pilar_b_normalizados": {
+    "pb_n_dependientes": 0.35294117647058826,
+    "pb_escolaridad_ord": -0.29411764705882354,
+    "pb_vivienda_propia": -0.23529411764705882,
+    "pb_edad": -0.11764705882352941
+  },
+  "coeficientes_pilar_b_raw": {
+    "pb_n_dependientes": 1.8,
+    "pb_escolaridad_ord": -1.5,
+    "pb_vivienda_propia": -1.2,
+    "pb_edad": -0.6
+  },
+  "coeficientes_pilar_c_normalizados": {
+    "pc_score_regional": -0.5882352941176471,
+    "pc_imn_2020": 0.23529411764705882,
+    "pc_pct_pob_ocupada_2sm": 0.17647058823529413
+  },
+  "coeficientes_pilar_c_raw": {
+    "pc_score_regional": -3.0,
+    "pc_imn_2020": 1.2,
+    "pc_pct_pob_ocupada_2sm": 0.9
+  },
+  "estandarizacion_pilar_a": {
+    "pa_ratio_remesa_cuota": {
+      "coef_normalizado": -0.3488372093023256,
+      "media": 1.197330931313964,
+      "desv": 0.0910093526221454
+    },
+    "pa_n_meses_sin_envio": {
+      "coef_normalizado": 0.18604651162790697,
+      "media": 1.1876,
+      "desv": 1.0671082944158954
+    },
+    "pa_max_racha_sin_envio": {
+      "coef_normalizado": 0.13953488372093023,
+      "media": 0.7595,
+      "desv": 0.5512623141607826
+    },
+    "pa_cv_remesa": {
+      "coef_normalizado": 0.11627906976744186,
+      "media": 0.3037992614870144,
+      "desv": 0.0516803333559299
+    },
+    "pa_pendiente_norm": {
+      "coef_normalizado": -0.09302325581395349,
+      "media": 0.0031660208899954335,
+      "desv": 0.01120756462765476
+    },
+    "pa_antiguedad_meses": {
+      "coef_normalizado": -0.11627906976744186,
+      "media": 75.9494,
+      "desv": 44.19577543495112
+    }
+  },
+  "estandarizacion_pilar_b": {
+    "pb_n_dependientes": {
+      "coef_normalizado": 0.35294117647058826,
+      "media": 2.3022,
+      "desv": 1.5137054833847445
+    },
+    "pb_escolaridad_ord": {
+      "coef_normalizado": -0.29411764705882354,
+      "media": 1.9703,
+      "desv": 1.1429560555220333
+    },
+    "pb_vivienda_propia": {
+      "coef_normalizado": -0.23529411764705882,
+      "media": 0.62,
+      "desv": 0.48541071512301376
+    },
+    "pb_edad": {
+      "coef_normalizado": -0.11764705882352941,
+      "media": 45.2009,
+      "desv": 11.49708473856519
+    }
+  },
+  "estandarizacion_pilar_c": {
+    "pc_score_regional": {
+      "coef_normalizado": -0.5882352941176471,
+      "media": 0.5551678617,
+      "desv": 0.09845384536468285
+    },
+    "pc_imn_2020": {
+      "coef_normalizado": 0.23529411764705882,
+      "media": 0.9152155762624754,
+      "desv": 0.029167450138492545
+    },
+    "pc_pct_pob_ocupada_2sm": {
+      "coef_normalizado": 0.17647058823529413,
+      "media": 62.07844747476305,
+      "desv": 9.744211128400693
+    }
+  },
+  "validaciones_signos": {
+    "pa_ratio_remesa_cuota": {
+      "coef": -0.3488372093023256,
+      "tasa_default_p25_inf": 0.0968,
+      "tasa_default_p75_sup": 0.0276,
+      "signo_esperado": "-",
+      "signo_observado": "-",
+      "consistente": true
+    },
+    "pa_n_meses_sin_envio": {
+      "coef": 0.18604651162790697,
+      "tasa_default_p25_inf": 0.0235,
+      "tasa_default_p75_sup": 0.0895,
+      "signo_esperado": "+",
+      "signo_observado": "+",
+      "consistente": true
+    },
+    "pa_max_racha_sin_envio": {
+      "coef": 0.13953488372093023,
+      "tasa_default_p25_inf": 0.0235,
+      "tasa_default_p75_sup": 0.0689,
+      "signo_esperado": "+",
+      "signo_observado": "+",
+      "consistente": true
+    },
+    "pa_cv_remesa": {
+      "coef": 0.11627906976744186,
+      "tasa_default_p25_inf": 0.0484,
+      "tasa_default_p75_sup": 0.0696,
+      "signo_esperado": "+",
+      "signo_observado": "+",
+      "consistente": true
+    },
+    "pa_pendiente_norm": {
+      "coef": -0.09302325581395349,
+      "tasa_default_p25_inf": 0.078,
+      "tasa_default_p75_sup": 0.0448,
+      "signo_esperado": "-",
+      "signo_observado": "-",
+      "consistente": true
+    },
+    "pa_antiguedad_meses": {
+      "coef": -0.11627906976744186,
+      "tasa_default_p25_inf": 0.0623,
+      "tasa_default_p75_sup": 0.0415,
+      "signo_esperado": "-",
+      "signo_observado": "-",
+      "consistente": true
+    },
+    "pb_n_dependientes": {
+      "coef": 0.35294117647058826,
+      "tasa_default_p25_inf": 0.0358,
+      "tasa_default_p75_sup": 0.0746,
+      "signo_esperado": "+",
+      "signo_observado": "+",
+      "consistente": true
+    },
+    "pb_escolaridad_ord": {
+      "coef": -0.29411764705882354,
+      "tasa_default_p25_inf": 0.0664,
+      "tasa_default_p75_sup": 0.0399,
+      "signo_esperado": "-",
+      "signo_observado": "-",
+      "consistente": true
+    },
+    "pb_vivienda_propia": {
+      "coef": -0.23529411764705882,
+      "tasa_default_p25_inf": 0.0684,
+      "tasa_default_p75_sup": 0.0474,
+      "signo_esperado": "-",
+      "signo_observado": "-",
+      "consistente": true
+    },
+    "pb_edad": {
+      "coef": -0.11764705882352941,
+      "tasa_default_p25_inf": 0.0598,
+      "tasa_default_p75_sup": 0.0529,
+      "signo_esperado": "-",
+      "signo_observado": "-",
+      "consistente": true
+    },
+    "pc_score_regional": {
+      "coef": -0.5882352941176471,
+      "tasa_default_p25_inf": 0.0842,
+      "tasa_default_p75_sup": 0.0319,
+      "signo_esperado": "-",
+      "signo_observado": "-",
+      "consistente": true
+    },
+    "pc_imn_2020": {
+      "coef": 0.23529411764705882,
+      "tasa_default_p25_inf": 0.0726,
+      "tasa_default_p75_sup": 0.0278,
+      "signo_esperado": "+",
+      "signo_observado": "-",
+      "consistente": false
+    },
+    "pc_pct_pob_ocupada_2sm": {
+      "coef": 0.17647058823529413,
+      "tasa_default_p25_inf": 0.0319,
+      "tasa_default_p75_sup": 0.0822,
+      "signo_esperado": "+",
+      "signo_observado": "+",
+      "consistente": true
+    }
+  },
+  "n_features_signo_consistente": 12,
+  "n_features_signo_validado": 13,
+  "consultation_timestamp": "2026-05-06T20:46:43"
+}

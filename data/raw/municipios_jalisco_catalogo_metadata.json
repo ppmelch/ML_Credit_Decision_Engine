@@ -1,0 +1,29 @@
+{
+  "descripcion": "Catálogo unificado de municipios de Jalisco. Combina geometrías del catálogo FAO GAUL / Earth Engine con claves INEGI oficiales tomadas del archivo de CONAPO IIM 2020. Funciona como fuente de verdad para todos los cruces del proyecto.",
+  "n_municipios": 124,
+  "n_municipios_jalisco_oficiales": 125,
+  "n_municipios_excluidos": 1,
+  "municipios_excluidos_cves": [
+    "14125"
+  ],
+  "razon_exclusion": "San Ignacio Cerro Gordo (14125) no está en el catálogo geográfico FAO base, posiblemente porque la versión administrativa de FAO GAUL es anterior a la creación del municipio en 2005.",
+  "fuentes": {
+    "geometrias": "FAO Global Administrative Unit Layers (GAUL) vía Earth Engine",
+    "claves_inegi_y_nombres": "CONAPO, IIM Mex-EUA 2020, archivo municipal"
+  },
+  "equivalencias_ortograficas": {
+    "Antonio Escobedo": "San Juanito de Escobedo",
+    "Atemajac De Brisuela": "Atemajac de Brizuela",
+    "Ciudad Guzman": "Zapotlán el Grande",
+    "Ciudad Venustiano C.": "Santa María del Oro",
+    "Concepcion De Buenos A.": "Concepción de Buenos Aires",
+    "Cuatitlan": "Cuautitlán de García Barragán",
+    "Ixtlahuacan De Los Membri": "Ixtlahuacán de los Membrillos",
+    "Manuel M. Dieguez": "San Gabriel",
+    "San Cristobal De La B.": "San Cristóbal de la Barranca",
+    "Sta. Maria De Los Angeles": "Santa María de los Ángeles",
+    "Tlaquepaque": "San Pedro Tlaquepaque",
+    "Yahualica De Gonzalez G.": "Yahualica de González Gallo"
+  },
+  "consultation_timestamp": "2026-05-06T00:48:20"
+}

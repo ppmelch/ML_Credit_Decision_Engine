@@ -1,0 +1,86 @@
+{
+  "descripcion": "Series mensuales individuales simuladas para los 10,000 hogares receptores del padrón sintético. Ventana fija de 24 meses (2023-01 a 2024-12). Modelo multiplicativo con monto base por hogar, factor estacional empírico de Jalisco (Fase 3), shock lognormal y indicador de envío Bernoulli.",
+  "n_hogares": 10000,
+  "n_meses": 24,
+  "ventana": "2023-01 a 2024-12",
+  "seed": 42,
+  "modelo_simulacion": "remesa_{i,t} = M_i × s(mes_t) × eps_{i,t} × ind_envio_{i,t}",
+  "componentes": {
+    "M_i": "remesa_mediana_esperada_usd del padrón (Fase 4).",
+    "s(mes_t)": "Factor estacional empírico de Jalisco estimado en Fase 3 (promedio anual = 1.0).",
+    "eps_{i,t}": "Lognormal con media=1, CV=0.3. mu_ln = -sigma_ln^2/2; sigma_ln = sqrt(log(1+CV^2)).",
+    "ind_envio_{i,t}": "Bernoulli(0.95) i.i.d. mes a mes."
+  },
+  "calibracion": {
+    "CV_shock": {
+      "valor": 0.3,
+      "fuente": "Calibrado con la dispersión mensual de la serie nacional Banxico SE27803 2013-2024 (variabilidad intra-anual residual del flujo)."
+    },
+    "P_envio": {
+      "valor": 0.95,
+      "fuente": "BBVA Research, Anuario de Migración y Remesas México 2024 — proporción de hogares receptores con interrupciones mensuales del flujo."
+    },
+    "estacionalidad": {
+      "fuente": "Fase 3 — desagregación Chow-Lin AR(1) de Banxico CE166 trimestral con indicadora SE27803.",
+      "factores": {
+        "1": 0.8495936183070825,
+        "2": 0.870607456433127,
+        "3": 1.0317677072167741,
+        "4": 0.9685244614333571,
+        "5": 1.0661843360166372,
+        "6": 1.0452042226285587,
+        "7": 1.0207438114899994,
+        "8": 1.0367514526164627,
+        "9": 0.9948253369020921,
+        "10": 1.060908818064556,
+        "11": 0.9880167688926301,
+        "12": 1.0668720099987232
+      }
+    }
+  },
+  "formato_salida": "Wide format: 1 fila por hogar, 11 columnas de metadatos + 24 columnas mensuales m_YYYY_MM. Compatible con modelos tabulares (LogReg, XGBoost) sin reshape; para LSTM se debe reshape a (n_hogares, n_meses, 1) en Fase 8.",
+  "diagnostico": {
+    "n_hogares": 10000,
+    "n_meses": 24,
+    "n_observaciones": 240000,
+    "pct_meses_con_envio_realizado": 0.9505166666666667,
+    "pct_meses_con_envio_target": 0.95,
+    "n_envios_por_hogar": {
+      "media": 22.8124,
+      "mediana": 23.0,
+      "min": 18,
+      "max": 24,
+      "p25": 22.0,
+      "p75": 24.0
+    },
+    "remesa_mediana_por_hogar_usd": {
+      "incluyendo_ceros": {
+        "media": 392.53441865392637,
+        "mediana": 353.50828841174854,
+        "p25": 260.40424278287077,
+        "p75": 480.2819941224186
+      },
+      "excluyendo_ceros": {
+        "media": 400.5790000932004,
+        "mediana": 360.6195522693214,
+        "p25": 265.88259863858366,
+        "p75": 491.21474177411227
+      }
+    },
+    "cv_intra_hogar": {
+      "media": 0.29705039259906096,
+      "mediana": 0.29278523013711155,
+      "target_aprox": 0.3,
+      "n_hogares_con_cv": 10000
+    },
+    "monto_base_promedio_padron": 417.853722,
+    "monto_realizado_promedio": 417.95024303472445,
+    "agregado_jalisco_24m_usd_millones": 95.34448124205348,
+    "promedio_mensual_jalisco_padron_musd": {
+      "media": 3.972686718418897,
+      "min": 3.3691157568800274,
+      "max": 4.2784036212626955
+    }
+  },
+  "consultation_timestamp": "2026-05-06T16:07:07"
+}

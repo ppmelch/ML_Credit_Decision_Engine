@@ -1,0 +1,30 @@
+{
+  "descripcion": "Score regional municipal del Componente 1 del modelo de crédito remesa, en escala [0, 1] donde mayor = más favorable para otorgamiento de crédito hipotecario.",
+  "n_municipios": 124,
+  "metodologia": {
+    "pesos": {
+      "capacidad_pago": 0.4,
+      "calidad_socioeconomica": 0.4,
+      "intensidad_migratoria": 0.2
+    },
+    "componentes": {
+      "capacidad_pago": [
+        "mediana_remesas_2020_2024 (normalizada)",
+        "estabilidad = 1 - cv_remesas_2020_2024 (normalizada)",
+        "pct_viv_remesas (normalizada)"
+      ],
+      "calidad_socioeconomica": [
+        "1 - im_2020 (normalizada, invertida)",
+        "escolaridad_promedio (normalizada)",
+        "tasa_ocupacion (normalizada)",
+        "pct_viv_internet (normalizada)"
+      ],
+      "intensidad_migratoria": [
+        "iim_dp2 (normalizada)"
+      ]
+    },
+    "normalizacion": "Min-max scaling sobre los 124 municipios",
+    "ponderacion": "Promedio ponderado de los tres sub-scores. Si algún sub-score es nulo, los pesos se re-normalizan."
+  },
+  "consultation_timestamp": "2026-05-06T07:13:34"
+}
