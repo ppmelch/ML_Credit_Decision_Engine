@@ -575,8 +575,14 @@ class Visualization:
             results["y_pred"]
         )
 
-        risk_bucket = (
-            data["risk_bucket"]
+        risk_bucket_train = (
+            data.loc[results["y_train"].index, "risk_bucket"]
+            .value_counts()
+            .sort_index()
+        )
+
+        risk_bucket_test = (
+            data.loc[results["y_test"].index, "risk_bucket"]
             .value_counts()
             .sort_index()
         )
@@ -621,9 +627,14 @@ class Visualization:
                     ].tolist()
             },
 
-            "risk_bucket": {
-                "labels": risk_bucket.index.tolist(),
-                "values": risk_bucket.values.tolist()
+            "risk_bucket_train": {
+                "labels": risk_bucket_train.astype(str).tolist(),
+                "values": risk_bucket_train.values.tolist()
+            },
+
+            "risk_bucket_test": {
+                "labels": risk_bucket_test.astype(str).tolist(),
+                "values": risk_bucket_test.values.tolist()
             }
 
         }

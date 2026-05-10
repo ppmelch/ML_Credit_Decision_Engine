@@ -43,7 +43,7 @@ def main():
     # == Visualizations ==
     viz = Visualization()
     #viz.plot_all(results, data_final)
-    viz.export_dashboard_data(results)
+    viz.export_dashboard_data(results , data_final)
 
     # == Save results (optional) ==
     data_final.to_csv("data/results.csv", index=False)

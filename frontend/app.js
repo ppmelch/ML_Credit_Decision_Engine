@@ -524,8 +524,8 @@ function loadDashboard() {
     ========================= */
 
     Plotly.newPlot("risk-bucket-train", [{
-        x: dashboardData.risk_bucket.labels,
-        y: dashboardData.risk_bucket.values,
+        x: dashboardData.risk_bucket_train.labels,
+        y: dashboardData.risk_bucket_train.values,
         type: "bar",
         marker: {
             color: [
@@ -536,7 +536,31 @@ function loadDashboard() {
         }
     }], {
         ...plotTheme,
-        title: "Risk Buckets",
+        title: "Risk Buckets - Train",
+        autosize: true,
+        height: 520,
+        xaxis: {
+            title: "Risk Bucket"
+        },
+        yaxis: {
+            title: "Count"
+        }
+    });
+
+    Plotly.newPlot("risk-bucket-test", [{
+        x: dashboardData.risk_bucket_test.labels,
+        y: dashboardData.risk_bucket_test.values,
+        type: "bar",
+        marker: {
+            color: [
+                "#3f634b",
+                "#d6a700",
+                "#8B0000"
+            ]
+        }
+    }], {
+        ...plotTheme,
+        title: "Risk Buckets - Test",
         autosize: true,
         height: 520,
         xaxis: {
