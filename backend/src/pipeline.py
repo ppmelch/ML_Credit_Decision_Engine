@@ -66,8 +66,8 @@ class CreditPipeline:
         )
 
         # 5.2 Business logic
-        logic = BusinessLogic(threshold=0.4, LGD=0.45 , rf=0.0364,
-                 inflation_premium=0.024, liquidity_premium=0.0326, admin_cost=0.02, profit_margin=0.0116)
+        logic = BusinessLogic(threshold=0.4, LGD=0.45 , rf=0.069971, 
+                 spread_fondeo=0.03, operating_cost=0.035, capital_cost=0.0189, profit_margin=0.015)
         self.data["decision"] = logic.credit_decision(pd_values)
         self.data["risk_bucket"] = logic.risk_buckets(pd_values)
         self.data["interest_rate_model"] = logic.calculate_interest_rate(pd_values)

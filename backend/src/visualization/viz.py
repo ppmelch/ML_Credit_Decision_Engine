@@ -553,8 +553,7 @@ class Visualization:
             y='interest_rate_model'
         )
         '''
-        
-    def export_dashboard_data(self, results):
+    def export_dashboard_data(self, results, data):
 
         fpr_train, tpr_train, _ = roc_curve(
             results["y_train"],
@@ -574,6 +573,12 @@ class Visualization:
         cm_test = sk_confusion_matrix(
             results["y_test"],
             results["y_pred"]
+        )
+
+        risk_bucket = (
+            data["risk_bucket"]
+            .value_counts()
+            .sort_index()
         )
 
         dashboard_data = {
@@ -604,10 +609,6 @@ class Visualization:
                     ].tolist()
             },
 
-
-
-
-
             "density_test": {
                 "approved":
                     results["y_prob"][
@@ -618,6 +619,11 @@ class Visualization:
                     results["y_prob"][
                         results["y_test"] == 1
                     ].tolist()
+            },
+
+            "risk_bucket": {
+                "labels": risk_bucket.index.tolist(),
+                "values": risk_bucket.values.tolist()
             }
 
         }

@@ -13,15 +13,15 @@ class BusinessLogic:
         Clients with PD below this threshold are approved.
     """
 
-    def __init__(self, threshold=0.4, LGD=0.45 , rf=0.0364,
-                 inflation_premium=0.024, liquidity_premium=0.0326, admin_cost=0.02, profit_margin=0.0116):
+    def __init__(self, threshold=0.5, LGD=0.45 , rf=0.069971,
+                 spread_fondeo=0.03, operating_cost=0.035, capital_cost=0.0189, profit_margin=0.015):
         self.threshold = threshold
         self.LGD = LGD
         self.rf = rf
-        self.inflation_premium = inflation_premium
-        self.liquidity_premium = liquidity_premium
-        self.admin_cost = admin_cost
-        self.profit_margin = profit_margin
+        self.sfondeo = spread_fondeo
+        self.coper = operating_cost
+        self.ccapital = capital_cost
+        self.m = profit_margin
 
     def credit_decision(self, pd_values: pd.Series) -> pd.Series:
         """
@@ -80,5 +80,10 @@ class BusinessLogic:
         """
         
         risk_premium = pd_values * self.LGD 
-
-        return self.rf + self.inflation_premium + risk_premium + self.liquidity_premium + self.admin_cost + self.profit_margin
+        
+        # rf + spread_fondeo + risk_premium + costos_operativos + costo_capital + Margen de utilidad
+        
+        return self.rf + self.sfondeo + risk_premium + self.coper + self.ccapital + self.m
+    
+    
+    

@@ -292,7 +292,7 @@ function loadDashboard() {
         mode: "lines",
         name: "Baseline",
         line: {
-            color: "#580000",
+            color: "#a40000",
             dash: "dash"
         }
     }], {
@@ -323,7 +323,7 @@ function loadDashboard() {
         mode: "lines",
         name: "Baseline",
         line: {
-            color: "#580000",
+            color: "#b10000",
             dash: "dash"
         }
     }], {
@@ -429,7 +429,7 @@ function loadDashboard() {
             opacity: 0.55,
             name: "Approved",
             marker: {
-                color: "#313131"
+                color: "#f3f0f0"
             }
         },
 
@@ -440,7 +440,7 @@ function loadDashboard() {
             opacity: 0.55,
             name: "Denied",
             marker: {
-                color: "#868686"
+                color: "#990000"
             }
         }
 
@@ -491,7 +491,7 @@ function loadDashboard() {
             opacity: 0.55,
             name: "Denied",
             marker: {
-                color: "#868686"
+                color: "#a40000"
             }
         }
 
@@ -515,6 +515,36 @@ function loadDashboard() {
             title: "Density"
         }
 
+    });
+
+
+
+    /* =========================
+    RISK BUCKET - TRAIN
+    ========================= */
+
+    Plotly.newPlot("risk-bucket-train", [{
+        x: dashboardData.risk_bucket.labels,
+        y: dashboardData.risk_bucket.values,
+        type: "bar",
+        marker: {
+            color: [
+                "#3f634b",
+                "#d6a700",
+                "#8B0000"
+            ]
+        }
+    }], {
+        ...plotTheme,
+        title: "Risk Buckets",
+        autosize: true,
+        height: 520,
+        xaxis: {
+            title: "Risk Bucket"
+        },
+        yaxis: {
+            title: "Count"
+        }
     });
 
 }
