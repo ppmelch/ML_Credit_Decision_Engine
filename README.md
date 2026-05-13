@@ -123,7 +123,7 @@ flowchart TB
         end
 
         subgraph CSS[css/]
-            style[style.css]
+            cssfile[style.css]
         end
 
     end
