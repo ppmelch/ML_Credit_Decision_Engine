@@ -1,0 +1,696 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.deck{display:flex;flex-direction:column;gap:2px;background:var(--color-background-tertiary)}
+.slide{background:#0f1117;color:#e8eaf0;min-height:420px;padding:2.5rem;position:relative;overflow:hidden}
+.slide-light{background:#f8f9fc;color:#1a1d2e}
+.slide-num{position:absolute;top:1.2rem;right:1.5rem;font-size:11px;color:rgba(255,255,255,.3);letter-spacing:2px}
+.slide-num-dark{color:rgba(0,0,0,.25)}
+.tag{display:inline-block;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:4px;margin-bottom:1rem}
+.tag-blue{background:rgba(55,138,221,.18);color:#85b7eb}
+.tag-teal{background:rgba(29,158,117,.18);color:#5dcaa5}
+.tag-amber{background:rgba(186,117,23,.18);color:#fac775}
+.tag-coral{background:rgba(216,90,48,.18);color:#f0997b}
+.tag-green{background:rgba(99,153,34,.18);color:#97c459}
+.slide-title{font-size:26px;font-weight:500;line-height:1.25;margin-bottom:.5rem;color:#fff}
+.slide-title-dark{color:#1a1d2e}
+.slide-sub{font-size:14px;color:rgba(255,255,255,.55);line-height:1.6}
+.slide-sub-dark{color:rgba(26,29,46,.55)}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:1.5rem}
+.kpi{background:rgba(255,255,255,.06);border:0.5px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem 1.1rem}
+.kpi-light{background:#fff;border:0.5px solid rgba(0,0,0,.1)}
+.kpi-label{font-size:11px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:1px;margin-bottom:.4rem}
+.kpi-label-dark{color:rgba(0,0,0,.4)}
+.kpi-value{font-size:24px;font-weight:500;line-height:1}
+.kpi-value-sm{font-size:18px;font-weight:500;line-height:1}
+.kpi-delta{font-size:11px;margin-top:.3rem}
+.v-blue{color:#85b7eb}
+.v-teal{color:#5dcaa5}
+.v-amber{color:#fac775}
+.v-coral{color:#f0997b}
+.v-green{color:#97c459}
+.v-pink{color:#ed93b1}
+.v-white{color:#fff}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:1.5rem}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:1.5rem}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:1rem}
+.pill{font-size:12px;padding:4px 12px;border-radius:20px;border:0.5px solid rgba(255,255,255,.15);color:rgba(255,255,255,.7)}
+.pill-dark{border:0.5px solid rgba(0,0,0,.12);color:rgba(0,0,0,.55)}
+.divider{height:0.5px;background:rgba(255,255,255,.1);margin:1.2rem 0}
+.divider-dark{background:rgba(0,0,0,.1)}
+.row{display:flex;align-items:center;gap:.75rem;margin-bottom:.6rem}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.bar-row{display:flex;flex-direction:column;gap:10px;margin-top:1rem}
+.bar-item{display:flex;flex-direction:column;gap:4px}
+.bar-label{font-size:12px;color:rgba(255,255,255,.6);display:flex;justify-content:space-between}
+.bar-track{height:6px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px}
+.rate-card{background:rgba(255,255,255,.06);border:0.5px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem;margin-bottom:10px}
+.rate-seg{font-size:11px;text-transform:uppercase;letter-spacing:1px;margin-bottom:.3rem}
+.rate-val{font-size:22px;font-weight:500}
+.stage-list{display:flex;flex-direction:column;gap:12px;margin-top:1.2rem}
+.stage{display:flex;gap:1rem;align-items:flex-start}
+.stage-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;flex-shrink:0}
+.stage-body{flex:1}
+.stage-title{font-size:13px;font-weight:500;margin-bottom:2px}
+.stage-desc{font-size:12px;color:rgba(255,255,255,.5);line-height:1.5}
+.map-wrap{position:relative;width:100%;height:260px;margin-top:1rem}
+.cover-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;min-height:340px}
+.cover-left{}
+.cover-logo{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:2rem}
+.cover-main{font-size:34px;font-weight:500;line-height:1.2;margin-bottom:.75rem;color:#fff}
+.cover-main span{color:#5dcaa5}
+.cover-team{margin-top:2rem}
+.cover-team-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.3);margin-bottom:.5rem}
+.cover-name{font-size:13px;color:rgba(255,255,255,.65);margin-bottom:3px}
+.cover-right{display:flex;flex-direction:column;gap:10px}
+.hero-stat{background:rgba(255,255,255,.06);border:0.5px solid rgba(255,255,255,.1);border-radius:12px;padding:1.2rem}
+.hero-stat-num{font-size:30px;font-weight:500;margin-bottom:.2rem}
+.hero-stat-label{font-size:12px;color:rgba(255,255,255,.45)}
+.impact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem}
+.impact-card{background:rgba(255,255,255,.05);border:0.5px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem}
+.impact-icon{font-size:20px;margin-bottom:.5rem}
+.impact-title{font-size:13px;font-weight:500;margin-bottom:.3rem}
+.impact-desc{font-size:12px;color:rgba(255,255,255,.5);line-height:1.5}
+.accent-line{width:40px;height:3px;border-radius:2px;margin-bottom:1.2rem}
+</style>
+
+<div class="deck">
+
+<div class="slide">
+  <div class="slide-num">01 / 10</div>
+  <div class="cover-grid">
+    <div class="cover-left">
+      <div class="cover-logo">ITESO · Credit Models · 2026</div>
+      <div class="accent-line" style="background:#5dcaa5"></div>
+      <div class="cover-main">Final <span>Credit</span><br>Model</div>
+      <div class="slide-sub" style="margin-top:.5rem">Remittance-Based Credit Scoring<br>for Jalisco, Mexico</div>
+      <div class="cover-team" style="margin-top:1.8rem">
+        <div class="cover-team-label">Authors</div>
+        <div class="cover-name">José Armando Melchor Soto — 745697</div>
+        <div class="cover-name">Rolando Fortanell Canedo — 744872</div>
+        <div class="cover-name">David Campos Ambriz — 744435</div>
+      </div>
+    </div>
+    <div class="cover-right">
+      <div class="hero-stat">
+        <div class="hero-stat-num v-teal">USD 64.7B</div>
+        <div class="hero-stat-label">Mexico remittances 2024 — record high</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num v-amber">USD 5.5B</div>
+        <div class="hero-stat-label">Jalisco — 3rd largest recipient state</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num v-coral">4.9M</div>
+        <div class="hero-stat-label">households excluded from formal credit</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="slide-num">02 / 10</div>
+  <div class="tag tag-coral">The Problem</div>
+  <div class="slide-title">Financial exclusion despite verifiable income</div>
+  <div class="slide-sub">Nearly 90% of remittances arrive via electronic transfer — fully traceable — yet millions are excluded.</div>
+  <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-top:1.8rem">
+    <div class="kpi">
+      <div class="kpi-label">Mexico 2024</div>
+      <div class="kpi-value v-teal">$64.7B</div>
+      <div class="kpi-delta" style="color:rgba(255,255,255,.4)">USD · record high</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Jalisco share</div>
+      <div class="kpi-value v-amber">8.5%</div>
+      <div class="kpi-delta" style="color:rgba(255,255,255,.4)">3rd nationally</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Via e-transfer</div>
+      <div class="kpi-value v-blue">90%</div>
+      <div class="kpi-delta" style="color:rgba(255,255,255,.4)">fully verifiable</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Excluded HH</div>
+      <div class="kpi-value v-coral">4.9M</div>
+      <div class="kpi-delta" style="color:rgba(255,255,255,.4)">no formal credit</div>
+    </div>
+  </div>
+  <div class="divider" style="margin-top:1.8rem"></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.2rem">
+    <div>
+      <div style="font-size:13px;font-weight:500;margin-bottom:.5rem;color:rgba(255,255,255,.7)">Root cause</div>
+      <div class="row"><div class="dot" style="background:#f0997b"></div><div style="font-size:13px;color:rgba(255,255,255,.6)">No payroll documentation</div></div>
+      <div class="row"><div class="dot" style="background:#f0997b"></div><div style="font-size:13px;color:rgba(255,255,255,.6)">No credit bureau history</div></div>
+      <div class="row"><div class="dot" style="background:#f0997b"></div><div style="font-size:13px;color:rgba(255,255,255,.6)">Account used as cash withdrawal only</div></div>
+    </div>
+    <div>
+      <div style="font-size:13px;font-weight:500;margin-bottom:.5rem;color:rgba(255,255,255,.7)">Consequence</div>
+      <div class="row"><div class="dot" style="background:#fac775"></div><div style="font-size:13px;color:rgba(255,255,255,.6)">Forced into informal financing (100–300%+)</div></div>
+      <div class="row"><div class="dot" style="background:#fac775"></div><div style="font-size:13px;color:rgba(255,255,255,.6)">Homes built in stages over years</div></div>
+      <div class="row"><div class="dot" style="background:#fac775"></div><div style="font-size:13px;color:rgba(255,255,255,.6)">No asset accumulation path</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="slide-num">03 / 10</div>
+  <div class="tag tag-teal">Our Solution</div>
+  <div class="slide-title">Remittance history as credit history</div>
+  <div class="slide-sub">A home improvement loan product for households that receive remittances — operated as an ENR SOFOM.</div>
+  <div class="two-col" style="margin-top:1.5rem">
+    <div>
+      <div style="font-size:13px;font-weight:500;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem">Product specs</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem .8rem;background:rgba(255,255,255,.05);border-radius:8px">
+          <span style="font-size:13px;color:rgba(255,255,255,.6)">Loan amounts</span>
+          <span style="font-size:13px;font-weight:500;color:#5dcaa5">MXN 50K – 500K</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem .8rem;background:rgba(255,255,255,.05);border-radius:8px">
+          <span style="font-size:13px;color:rgba(255,255,255,.6)">Terms</span>
+          <span style="font-size:13px;font-weight:500;color:#5dcaa5">5 – 15 years</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem .8rem;background:rgba(255,255,255,.05);border-radius:8px">
+          <span style="font-size:13px;color:rgba(255,255,255,.6)">History required</span>
+          <span style="font-size:13px;font-weight:500;color:#fac775">24 months</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem .8rem;background:rgba(255,255,255,.05);border-radius:8px">
+          <span style="font-size:13px;color:rgba(255,255,255,.6)">Payment method</span>
+          <span style="font-size:13px;font-weight:500;color:#85b7eb">Auto debit</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem .8rem;background:rgba(255,255,255,.05);border-radius:8px">
+          <span style="font-size:13px;color:rgba(255,255,255,.6)">Geography</span>
+          <span style="font-size:13px;font-weight:500;color:#85b7eb">124 municipalities</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:13px;font-weight:500;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem">Jalisco · risk map</div>
+      <div class="map-wrap" style="height:220px">
+        <canvas id="mapChart" role="img" aria-label="Choropleth map of Jalisco municipalities colored by credit risk level">Map of Jalisco showing municipality risk distribution: Guadalajara and Zapopan Low Risk, rural municipalities Medium to High Risk.</canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="slide-num">04 / 10</div>
+  <div class="tag tag-blue" style="background:rgba(55,138,221,.18);color:#85b7eb">Data architecture</div>
+  <div class="slide-title">Three-pillar feature framework</div>
+  <div class="slide-sub">10,000 synthetic households calibrated against 10 official sources. Chow-Lin disaggregation: r = 0.9842.</div>
+  <div class="three-col">
+    <div class="kpi" style="border-color:rgba(93,202,165,.3)">
+      <div class="kpi-label" style="color:#5dcaa5">Pillar A · remittance flow</div>
+      <div class="kpi-value-sm v-teal">12</div>
+      <div class="kpi-delta" style="color:rgba(255,255,255,.4);margin-top:.3rem">features</div>
+      <div class="divider" style="margin:.8rem 0"></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.45);line-height:1.7">Median · Mean · CV<br>Trend slope · Seasonal<br>Months without transfer<br>Max streak gap · Age</div>
+    </div>
+    <div class="kpi" style="border-color:rgba(133,183,235,.3)">
+      <div class="kpi-label" style="color:#85b7eb">Pillar B · demographics</div>
+      <div class="kpi-value-sm v-blue">6</div>
+      <div class="kpi-delta" style="color:rgba(255,255,255,.4);margin-top:.3rem">features</div>
+      <div class="divider" style="margin:.8rem 0"></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.45);line-height:1.7">Age · Gender<br>Dependents<br>Education level<br>Home ownership · Rental</div>
+    </div>
+    <div class="kpi" style="border-color:rgba(250,199,117,.3)">
+      <div class="kpi-label" style="color:#fac775">Pillar C · municipal context</div>
+      <div class="kpi-value-sm v-amber">9</div>
+      <div class="kpi-delta" style="color:rgba(255,255,255,.4);margin-top:.3rem">features</div>
+      <div class="divider" style="margin:.8rem 0"></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.45);line-height:1.7">Migration Index DP2<br>Marginalization Index<br>Regional Score<br>Payment capacity sub-score</div>
+    </div>
+  </div>
+  <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr);margin-top:1rem">
+    <div class="kpi"><div class="kpi-label">Dataset</div><div class="kpi-value-sm v-white">10,000</div><div class="kpi-delta" style="color:rgba(255,255,255,.4)">synthetic HH</div></div>
+    <div class="kpi"><div class="kpi-label">Sources</div><div class="kpi-value-sm v-white">10</div><div class="kpi-delta" style="color:rgba(255,255,255,.4)">official institutions</div></div>
+    <div class="kpi"><div class="kpi-label">Default rate</div><div class="kpi-value-sm v-coral">5.5%</div><div class="kpi-delta" style="color:rgba(255,255,255,.4)">CNBV-calibrated</div></div>
+    <div class="kpi"><div class="kpi-label">Seasonal corr.</div><div class="kpi-value-sm v-teal">0.984</div><div class="kpi-delta" style="color:rgba(255,255,255,.4)">Chow-Lin r</div></div>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="slide-num">05 / 10</div>
+  <div class="tag tag-teal">Feature engineering</div>
+  <div class="slide-title">XGBoost gain + SHAP explainability</div>
+  <div class="slide-sub">Remittance interruption patterns and repayment capacity dominate predictive power.</div>
+  <div class="two-col" style="margin-top:1.5rem">
+    <div>
+      <div style="font-size:13px;font-weight:500;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:.8rem">Feature importance · XGBoost gain</div>
+      <div class="bar-row">
+        <div class="bar-item">
+          <div class="bar-label"><span>pa_n_meses_sin_envio</span><span style="color:#5dcaa5">160</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%;background:#5dcaa5"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>pa_ratio_remesa_cuota</span><span style="color:#5dcaa5">145</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:91%;background:#5dcaa5"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>pa_max_racha_sin_envio</span><span style="color:#85b7eb">128</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:80%;background:#85b7eb"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>pc_score_regional</span><span style="color:#85b7eb">95</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:59%;background:#85b7eb"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>pb_n_dependientes</span><span style="color:#fac775">88</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:55%;background:#fac775"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>pc_sub_capacidad_pago</span><span style="color:#fac775">74</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:46%;background:#fac775"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>pa_pendiente_norm</span><span style="color:#f0997b">66</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:41%;background:#f0997b"></div></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label"><span>pb_escolaridad_ord</span><span style="color:#f0997b">58</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:36%;background:#f0997b"></div></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:13px;font-weight:500;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:.8rem">SHAP interpretation</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="padding:.8rem;background:rgba(93,202,165,.1);border:0.5px solid rgba(93,202,165,.25);border-radius:8px">
+          <div style="font-size:12px;font-weight:500;color:#5dcaa5;margin-bottom:.3rem">Non-default signals</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.6">High remittance-to-quota ratio · Long uninterrupted history · Strong regional score · Home ownership</div>
+        </div>
+        <div style="padding:.8rem;background:rgba(240,153,123,.1);border:0.5px solid rgba(240,153,123,.25);border-radius:8px">
+          <div style="font-size:12px;font-weight:500;color:#f0997b;margin-bottom:.3rem">Default signals</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.6">Multiple months without transfers · Long consecutive gap · Low remittance-to-quota ratio · High marginalization</div>
+        </div>
+        <div style="padding:.8rem;background:rgba(255,255,255,.05);border:0.5px solid rgba(255,255,255,.1);border-radius:8px">
+          <div style="font-size:12px;font-weight:500;color:rgba(255,255,255,.7);margin-bottom:.3rem">Final feature set</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.55)">15 variables selected · low pairwise correlations · multicollinearity resolved</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="slide-num">06 / 10</div>
+  <div class="tag tag-blue" style="background:rgba(55,138,221,.18);color:#85b7eb">Model performance</div>
+  <div class="slide-title">Logistic Regression selected — logistic_v2</div>
+  <div class="slide-sub">Best balance of stability, calibration, and regulatory interpretability across 4 benchmarked models.</div>
+  <div class="kpi-grid" style="grid-template-columns:repeat(6,1fr);margin-top:1.5rem">
+    <div class="kpi" style="border-color:rgba(93,202,165,.4)">
+      <div class="kpi-label">ROC-AUC test</div>
+      <div class="kpi-value v-teal">0.79</div>
+    </div>
+    <div class="kpi" style="border-color:rgba(93,202,165,.2)">
+      <div class="kpi-label">ROC-AUC train</div>
+      <div class="kpi-value v-teal">0.78</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Accuracy</div>
+      <div class="kpi-value v-blue">89.9%</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">F1-Score</div>
+      <div class="kpi-value v-amber">29.1%</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Precision</div>
+      <div class="kpi-value v-white">23.7%</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Recall</div>
+      <div class="kpi-value v-white">37.7%</div>
+    </div>
+  </div>
+  <div class="two-col" style="margin-top:1.2rem">
+    <div>
+      <div style="font-size:12px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:.7rem">Model benchmarks</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:.55rem .8rem;background:rgba(93,202,165,.12);border:0.5px solid rgba(93,202,165,.3);border-radius:8px">
+          <span style="font-size:12px;color:#5dcaa5;font-weight:500">Logistic Regression ✓</span>
+          <span style="font-size:12px;color:#5dcaa5">AUC 0.79</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:.55rem .8rem;background:rgba(255,255,255,.04);border-radius:8px">
+          <span style="font-size:12px;color:rgba(255,255,255,.55)">Random Forest</span>
+          <span style="font-size:12px;color:rgba(255,255,255,.4)">AUC 0.78</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:.55rem .8rem;background:rgba(255,255,255,.04);border-radius:8px">
+          <span style="font-size:12px;color:rgba(255,255,255,.55)">XGBoost</span>
+          <span style="font-size:12px;color:rgba(255,255,255,.4)">AUC 0.77</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:.55rem .8rem;background:rgba(255,255,255,.04);border-radius:8px">
+          <span style="font-size:12px;color:rgba(255,255,255,.55)">LightGBM</span>
+          <span style="font-size:12px;color:rgba(255,255,255,.4)">AUC 0.76</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:.7rem">Final configuration</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;justify-content:space-between;padding:.55rem .8rem;background:rgba(255,255,255,.05);border-radius:8px">
+          <span style="font-size:12px;color:rgba(255,255,255,.55)">Optimizer</span><span style="font-size:12px;color:#85b7eb">Optuna</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:.55rem .8rem;background:rgba(255,255,255,.05);border-radius:8px">
+          <span style="font-size:12px;color:rgba(255,255,255,.55)">Tracking</span><span style="font-size:12px;color:#85b7eb">MLflow</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:.55rem .8rem;background:rgba(255,255,255,.05);border-radius:8px">
+          <span style="font-size:12px;color:rgba(255,255,255,.55)">Regularization C</span><span style="font-size:12px;color:#fac775">5.84</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:.55rem .8rem;background:rgba(255,255,255,.05);border-radius:8px">
+          <span style="font-size:12px;color:rgba(255,255,255,.55)">Optimal threshold</span><span style="font-size:12px;color:#fac775">0.7244</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="slide-num">07 / 10</div>
+  <div class="tag tag-amber">Risk-based pricing</div>
+  <div class="slide-title">Six-component interest rate formula</div>
+  <div class="slide-sub" style="font-family:var(--font-mono);font-size:13px;margin-top:.3rem">Rate = r_f + s_anchorage + (PD · LGD) + c_operat + c_capital + m</div>
+  <div class="two-col" style="margin-top:1.5rem">
+    <div>
+      <div style="font-size:12px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:.8rem">Rate components · all borrowers</div>
+      <div style="display:flex;flex-direction:column;gap:5px">
+        <div style="display:flex;justify-content:space-between;padding:.5rem .8rem;background:rgba(255,255,255,.05);border-radius:7px">
+          <span style="font-size:12px;color:rgba(255,255,255,.55)">Risk-free rate TIIE 28d</span><span style="font-size:12px;color:#fff">6.997%</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:.5rem .8rem;background:rgba(255,255,255,.05);border-radius:7px">
+          <span style="font-size:12px;color:rgba(255,255,255,.55)">Funding spread (SOFOM)</span><span style="font-size:12px;color:#fff">+3.00%</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:.5rem .8rem;background:rgba(255,255,255,.05);border-radius:7px">
+          <span style="font-size:12px;color:rgba(255,255,255,.55)">Operating costs</span><span style="font-size:12px;color:#fff">+3.50%</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:.5rem .8rem;background:rgba(255,255,255,.05);border-radius:7px">
+          <span style="font-size:12px;color:rgba(255,255,255,.55)">Capital cost (Basel III)</span><span style="font-size:12px;color:#fff">+1.89%</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:.5rem .8rem;background:rgba(255,255,255,.05);border-radius:7px">
+          <span style="font-size:12px;color:rgba(255,255,255,.55)">Profit margin</span><span style="font-size:12px;color:#fff">+1.50%</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:.5rem .8rem;background:rgba(255,255,255,.09);border:0.5px solid rgba(255,255,255,.15);border-radius:7px">
+          <span style="font-size:12px;font-weight:500;color:rgba(255,255,255,.8)">Base (ex risk premium)</span><span style="font-size:12px;font-weight:500;color:#fac775">16.887%</span>
+        </div>
+        <div style="margin-top:.4rem;font-size:11px;color:rgba(255,255,255,.35)">LGD calibrated at 45% · Partial mitigation via auto-debit</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:.8rem">Final rates by risk segment</div>
+      <div class="rate-card" style="border-color:rgba(93,202,165,.35)">
+        <div class="rate-seg" style="color:#5dcaa5">Low risk · PD 19.8%</div>
+        <div class="rate-val v-teal">28.25% <span style="font-size:13px;font-weight:400;color:rgba(255,255,255,.4)">± 3%</span></div>
+        <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:.3rem">Up to MXN 500K · 15 years · Auto approved</div>
+      </div>
+      <div class="rate-card" style="border-color:rgba(250,199,117,.35)">
+        <div class="rate-seg" style="color:#fac775">Medium risk · PD 47.8%</div>
+        <div class="rate-val v-amber">37.70% <span style="font-size:13px;font-weight:400;color:rgba(255,255,255,.4)">± 3%</span></div>
+        <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:.3rem">Up to MXN 300K · 10 years · With verification</div>
+      </div>
+      <div class="rate-card" style="border-color:rgba(240,153,123,.35)">
+        <div class="rate-seg" style="color:#f0997b">High risk · PD 76.4%</div>
+        <div class="rate-val v-coral">47.90% <span style="font-size:13px;font-weight:400;color:rgba(255,255,255,.4)">± 3%</span></div>
+        <div style="font-size:11px;color:rgba(255,255,255,.35);margin-top:.3rem">Up to MXN 100K · 5 years · Conditional</div>
+      </div>
+      <div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:.5rem;line-height:1.5">vs. informal financing: 100–300%+ · vs. conventional mortgage APR: 14.13%</div>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="slide-num">08 / 10</div>
+  <div class="tag tag-blue" style="background:rgba(55,138,221,.18);color:#85b7eb">Credit policy</div>
+  <div class="slide-title">Three-stage origination system</div>
+  <div class="slide-sub">92.89% applicant conversion rate — households previously invisible to the formal credit system.</div>
+  <div class="two-col" style="margin-top:1.5rem">
+    <div>
+      <div class="stage-list">
+        <div class="stage">
+          <div class="stage-num" style="background:rgba(93,202,165,.2);color:#5dcaa5">1</div>
+          <div class="stage-body">
+            <div class="stage-title" style="color:#5dcaa5">Admission</div>
+            <div class="stage-desc">Minimum 24 months of electronic remittance history — digitally verifiable, no payroll required</div>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num" style="background:rgba(133,183,235,.2);color:#85b7eb">2</div>
+          <div class="stage-body">
+            <div class="stage-title" style="color:#85b7eb">Scoring</div>
+            <div class="stage-desc">15-variable ML model assigns applicant to Low, Medium, or High Risk bucket via logistic_v2</div>
+          </div>
+        </div>
+        <div class="stage">
+          <div class="stage-num" style="background:rgba(250,199,117,.2);color:#fac775">3</div>
+          <div class="stage-body">
+            <div class="stage-title" style="color:#fac775">Decision</div>
+            <div class="stage-desc">Automatic policy assigns rate, maximum amount, and term based on risk bucket classification</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px;margin-bottom:.8rem">Pool distribution</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+            <span style="font-size:12px;color:#5dcaa5">Low Risk · auto approved</span>
+            <span style="font-size:12px;color:#5dcaa5">7.23%</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:7.23%;background:#5dcaa5;min-width:8px"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+            <span style="font-size:12px;color:#fac775">Medium Risk · with verification</span>
+            <span style="font-size:12px;color:#fac775">85.66%</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:85.66%;background:#fac775"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+            <span style="font-size:12px;color:#f0997b">High Risk · conditional</span>
+            <span style="font-size:12px;color:#f0997b">7.11%</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" style="width:7.11%;background:#f0997b;min-width:8px"></div></div>
+        </div>
+      </div>
+      <div style="margin-top:1.2rem;padding:1rem;background:rgba(93,202,165,.1);border:0.5px solid rgba(93,202,165,.3);border-radius:10px;text-align:center">
+        <div style="font-size:28px;font-weight:500;color:#5dcaa5">92.89%</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.5);margin-top:.2rem">overall conversion rate</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="slide-num">09 / 10</div>
+  <div class="tag tag-green" style="background:rgba(99,153,34,.18);color:#97c459">Financial projections</div>
+  <div class="slide-title">Three-year ENR SOFOM model</div>
+  <div class="slide-sub">500 loans Year 1 → 845 Year 3 · avg MXN 200K · 40% Low / 50% Med / 10% High Risk</div>
+  <div class="kpi-grid" style="grid-template-columns:repeat(6,1fr);margin-top:1.2rem">
+    <div class="kpi" style="border-color:rgba(151,196,89,.4)">
+      <div class="kpi-label">Gross portfolio Y3</div>
+      <div class="kpi-value-sm v-green">$320.9M</div>
+      <div class="kpi-delta" style="color:rgba(255,255,255,.4)">MXN</div>
+    </div>
+    <div class="kpi" style="border-color:rgba(151,196,89,.4)">
+      <div class="kpi-label">Net income Y3</div>
+      <div class="kpi-value-sm v-green">$29.8M</div>
+      <div class="kpi-delta" style="color:rgba(255,255,255,.4)">vs $558K Y1</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">ROE Year 3</div>
+      <div class="kpi-value-sm v-teal">75.2%</div>
+      <div class="kpi-delta" style="color:rgba(255,255,255,.4)">target 18%</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">ROA Year 3</div>
+      <div class="kpi-value-sm v-teal">11.4%</div>
+      <div class="kpi-delta" style="color:rgba(255,255,255,.4)">SOFOM range</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">NPL ratio</div>
+      <div class="kpi-value-sm v-amber">3.0%</div>
+      <div class="kpi-delta" style="color:rgba(255,255,255,.4)">CNBV aligned</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">ICAP Y3</div>
+      <div class="kpi-value-sm v-blue">17.0%</div>
+      <div class="kpi-delta" style="color:rgba(255,255,255,.4)">Basel III min 10.5%</div>
+    </div>
+  </div>
+  <div style="margin-top:1.2rem;position:relative;height:160px">
+    <canvas id="projChart" role="img" aria-label="Bar chart showing portfolio and net income growth over 3 years">Year 1: portfolio 92M, income 559K. Year 2: portfolio 196M, income 14.2M. Year 3: portfolio 320.9M, income 29.8M.</canvas>
+  </div>
+  <div style="display:flex;gap:1.5rem;margin-top:.7rem;font-size:12px">
+    <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:#5dcaa5;display:inline-block"></span><span style="color:rgba(255,255,255,.5)">Gross portfolio (MXN M)</span></span>
+    <span style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:#fac775;display:inline-block"></span><span style="color:rgba(255,255,255,.5)">Net income (MXN M)</span></span>
+    <span style="color:rgba(255,255,255,.4);margin-left:auto">Capital recovery: 1.67 years · NPV positive · IRR > Ke</span>
+  </div>
+</div>
+
+<div class="slide">
+  <div class="slide-num">10 / 10</div>
+  <div class="tag tag-teal">Impact and conclusions</div>
+  <div class="slide-title">Financial inclusion + institutional sustainability</div>
+  <div class="slide-sub">Remittance patterns can formally replace credit bureau history — a replicable precedent for Mexico's financial system.</div>
+  <div class="impact-grid" style="margin-top:1.2rem">
+    <div class="impact-card">
+      <div class="impact-icon"><i class="ti ti-users" aria-hidden="true" style="font-size:20px;color:#5dcaa5"></i></div>
+      <div class="impact-title" style="color:#5dcaa5">Social impact</div>
+      <div class="impact-desc">4.9M households nationally addressable · 92.89% conversion from previously excluded applicants · credit history building from first payment</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-icon"><i class="ti ti-currency-dollar" aria-hidden="true" style="font-size:20px;color:#97c459"></i></div>
+      <div class="impact-title" style="color:#97c459">Financial viability</div>
+      <div class="impact-desc">$44.5M cumulative net profit · 1.67-year payback · ROE 75.2% Year 3 · All 13 financial validations satisfied · NPV positive</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-icon"><i class="ti ti-home" aria-hidden="true" style="font-size:20px;color:#85b7eb"></i></div>
+      <div class="impact-title" style="color:#85b7eb">Rates vs. alternatives</div>
+      <div class="impact-desc">28–48% vs. informal 100–300%+ · Families complete homes at once instead of building in stages over years · Auto-debit reduces collection risk</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-icon"><i class="ti ti-leaf" aria-hidden="true" style="font-size:20px;color:#fac775"></i></div>
+      <div class="impact-title" style="color:#fac775">Environmental</div>
+      <div class="impact-desc">Existing housing improvement reduces urban sprawl · Less demolition waste · Housing densification without expanding city footprint in Jalisco</div>
+    </div>
+  </div>
+  <div style="margin-top:1.2rem;padding:1rem 1.2rem;background:rgba(255,255,255,.04);border:0.5px solid rgba(255,255,255,.1);border-radius:10px;display:flex;justify-content:space-between;align-items:center">
+    <div>
+      <div style="font-size:12px;font-weight:500;color:rgba(255,255,255,.6);margin-bottom:.2rem">Next step</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.4)">Real-world piloting with active SOFOM + remittance operator · Synthetic → real transaction data</div>
+    </div>
+    <div style="text-align:right">
+      <div style="font-size:11px;color:rgba(255,255,255,.3)">Key risk</div>
+      <div style="font-size:12px;color:#f0997b">2025 remittance contraction −4.6% national / −10% Jalisco</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const isDark = true;
+
+new Chart(document.getElementById('projChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Year 1', 'Year 2', 'Year 3'],
+    datasets: [
+      {
+        label: 'Gross portfolio',
+        data: [92, 196, 320.9],
+        backgroundColor: 'rgba(93,202,165,0.7)',
+        borderColor: '#5dcaa5',
+        borderWidth: 1,
+        borderRadius: 4
+      },
+      {
+        label: 'Net income',
+        data: [0.56, 14.2, 29.8],
+        backgroundColor: 'rgba(250,199,117,0.7)',
+        borderColor: '#fac775',
+        borderWidth: 1,
+        borderRadius: 4
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false }
+    },
+    scales: {
+      x: {
+        ticks: { color: 'rgba(255,255,255,0.45)', font: { size: 11 } },
+        grid: { color: 'rgba(255,255,255,0.05)' }
+      },
+      y: {
+        ticks: { color: 'rgba(255,255,255,0.45)', font: { size: 11 }, callback: v => '$' + v + 'M' },
+        grid: { color: 'rgba(255,255,255,0.05)' }
+      }
+    }
+  }
+});
+
+const mapCanvas = document.getElementById('mapChart');
+const mCtx = mapCanvas.getContext('2d');
+const w = mapCanvas.parentElement.offsetWidth || 320;
+const h = 220;
+mapCanvas.width = w;
+mapCanvas.height = h;
+
+const jalisco = [
+  {name:'Guadalajara',x:.52,y:.42,r:16,risk:0},
+  {name:'Zapopan',x:.44,y:.37,r:13,risk:0},
+  {name:'Tlaquepaque',x:.56,y:.48,r:10,risk:0},
+  {name:'Tonalá',x:.62,y:.44,r:8,risk:1},
+  {name:'Tlajomulco',x:.50,y:.56,r:8,risk:0},
+  {name:'El Salto',x:.65,y:.50,r:6,risk:1},
+  {name:'Tepatitlán',x:.72,y:.32,r:7,risk:1},
+  {name:'Lagos de Moreno',x:.80,y:.20,r:7,risk:1},
+  {name:'Puerto Vallarta',x:.15,y:.30,r:7,risk:0},
+  {name:'Ameca',x:.32,y:.50,r:6,risk:1},
+  {name:'Autlán',x:.20,y:.65,r:6,risk:2},
+  {name:'Cd. Guzmán',x:.45,y:.72,r:7,risk:1},
+  {name:'Tequila',x:.28,y:.38,r:5,risk:1},
+  {name:'Arandas',x:.76,y:.38,r:5,risk:2},
+  {name:'Jesús María',x:.68,y:.26,r:5,risk:2},
+  {name:'Chimaltitán',x:.25,y:.18,r:4,risk:2},
+  {name:'Sta María de los Ángeles',x:.62,y:.16,r:4,risk:2},
+  {name:'San Martín de Bolaños',x:.40,y:.14,r:4,risk:2},
+  {name:'Mazamitla',x:.55,y:.80,r:5,risk:2},
+  {name:'Tomatlán',x:.12,y:.55,r:5,risk:2},
+];
+
+const colors = ['rgba(93,202,165,0.8)','rgba(250,199,117,0.8)','rgba(240,153,123,0.8)'];
+const borders = ['#5dcaa5','#fac775','#f0997b'];
+
+mCtx.fillStyle = 'rgba(255,255,255,0.04)';
+mCtx.beginPath();
+mCtx.moveTo(w*0.10, h*0.25);
+mCtx.bezierCurveTo(w*0.15, h*0.10, w*0.40, h*0.05, w*0.70, h*0.08);
+mCtx.bezierCurveTo(w*0.90, h*0.12, w*0.95, h*0.30, w*0.92, h*0.55);
+mCtx.bezierCurveTo(w*0.88, h*0.75, w*0.65, h*0.92, w*0.45, h*0.90);
+mCtx.bezierCurveTo(w*0.25, h*0.88, w*0.08, h*0.72, w*0.06, h*0.55);
+mCtx.bezierCurveTo(w*0.04, h*0.40, w*0.07, h*0.35, w*0.10, h*0.25);
+mCtx.closePath();
+mCtx.fill();
+mCtx.strokeStyle = 'rgba(255,255,255,0.08)';
+mCtx.lineWidth = 0.5;
+mCtx.stroke();
+
+jalisco.forEach(m => {
+  const cx = m.x * w;
+  const cy = m.y * h;
+  mCtx.beginPath();
+  mCtx.arc(cx, cy, m.r, 0, Math.PI * 2);
+  mCtx.fillStyle = colors[m.risk];
+  mCtx.fill();
+  mCtx.strokeStyle = borders[m.risk];
+  mCtx.lineWidth = 1;
+  mCtx.stroke();
+  if (m.r >= 8) {
+    mCtx.fillStyle = 'rgba(0,0,0,0.7)';
+    mCtx.font = '9px sans-serif';
+    mCtx.textAlign = 'center';
+    mCtx.fillText(m.name.split(' ')[0], cx, cy + m.r + 9);
+  }
+});
+
+const legend = [{c:'rgba(93,202,165,0.8)',l:'Low risk'},{c:'rgba(250,199,117,0.8)',l:'Medium'},{c:'rgba(240,153,123,0.8)',l:'High risk'}];
+legend.forEach((lg,i) => {
+  const lx = 8 + i * 80;
+  mCtx.beginPath();
+  mCtx.arc(lx + 5, h - 10, 5, 0, Math.PI*2);
+  mCtx.fillStyle = lg.c;
+  mCtx.fill();
+  mCtx.fillStyle = 'rgba(255,255,255,0.5)';
+  mCtx.font = '10px sans-serif';
+  mCtx.textAlign = 'left';
+  mCtx.fillText(lg.l, lx + 13, h - 6);
+});
+</script>
