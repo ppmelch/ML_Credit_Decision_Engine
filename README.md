@@ -1,4 +1,4 @@
-# Final Credit Model
+# ML Credit Decision Engine
 ### Credit Models — ITESO Universidad Jesuita de Guadalajara
 
 **Authors:**
